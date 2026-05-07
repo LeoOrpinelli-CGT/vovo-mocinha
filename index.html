@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cogtive × Vovó Mocinha — Apresentação Exclusiva</title>
+<link rel="icon" type="image/png" href="Cogtive_Symbol_Off_White.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cogtive-blue: #0066FF;
+  --cogtive-blue-dark: #0050CC;
+  --cogtive-blue-light: #3385FF;
+  --cogtive-blue-glow: rgba(0, 102, 255, 0.3);
+  --dark: #0A0E1A;
+  --dark-card: #111827;
+  --dark-surface: #1A2035;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --accent-red: #EF4444;
+  --accent-green: #10B981;
+  --accent-orange: #F59E0B;
+  --accent-teal: #14B8A6;
+  --accent-purple: #8B5CF6;
+  --accent-magenta: #EC4899;
+  --accent-yellow: #FBBF24;
+  --accent-cyan: #06B6D4;
+  --vovo-red: #E60019;
+  --border: rgba(255,255,255,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--cogtive-blue) var(--dark); }
+body { font-family: 'Outfit', sans-serif; background: var(--dark); color: var(--text-primary); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body.locked { overflow: hidden; }
+
+/* LOGIN */
+.login-overlay { position: fixed; inset: 0; background: radial-gradient(circle at 50% 30%, #0F1E3D 0%, var(--dark) 70%); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.login-card { width: 100%; max-width: 440px; background: rgba(17,24,39,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 3rem 2.5rem; box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(0,102,255,0.1); position: relative; overflow: hidden; }
+.login-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cogtive-blue), var(--accent-teal)); }
+.login-logo { height: 40px; width: auto; max-width: 70%; margin-bottom: 2rem; display: block; object-fit: contain; }
+svg.login-logo { height: 40px; margin-bottom: 2rem; display: block; width: auto; }
+.login-card h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 0.4rem; }
+.login-card .login-sub { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.5; }
+.login-form { display: flex; flex-direction: column; gap: 1rem; }
+.login-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.login-field label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 600; }
+.login-field input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.85rem 1rem; color: var(--text-primary); font-family: inherit; font-size: 0.95rem; transition: all 0.2s ease; }
+.login-field input:focus { outline: none; border-color: var(--cogtive-blue); background: rgba(0,102,255,0.05); }
+.login-submit { background: linear-gradient(135deg, var(--cogtive-blue), var(--cogtive-blue-dark)); color: white; border: none; padding: 1rem; border-radius: 10px; font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: all 0.25s ease; letter-spacing: 0.3px; }
+.login-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,102,255,0.35); }
+.login-error { color: var(--accent-red); font-size: 0.85rem; margin-top: 0.5rem; min-height: 1.2em; display: flex; align-items: center; gap: 0.4rem; }
+.login-footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); }
+
+/* ADMIN */
+.admin-overlay { position: fixed; inset: 0; background: rgba(5,8,15,0.92); backdrop-filter: blur(8px); z-index: 10100; display: none; align-items: center; justify-content: center; padding: 2rem; }
+.admin-overlay.visible { display: flex; }
+.admin-card { width: 100%; max-width: 500px; background: var(--dark-card); border: 1px solid var(--cogtive-blue); border-radius: 20px; padding: 2.5rem; position: relative; box-shadow: 0 0 80px rgba(0,102,255,0.2); }
+.admin-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.6rem; }
+.admin-card h3 .tag { font-size: 0.6rem; padding: 0.25rem 0.6rem; background: var(--cogtive-blue); color: white; border-radius: 100px; letter-spacing: 1.5px; font-weight: 700; }
+.admin-card .admin-sub { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+.admin-close { position: absolute; top: 1rem; right: 1rem; background: transparent; border: 1px solid rgba(255,255,255,0.1); width: 32px; height: 32px; border-radius: 50%; color: var(--text-muted); cursor: pointer; font-size: 1rem; }
+.admin-close:hover { color: var(--text-primary); border-color: var(--text-primary); }
+.admin-section { margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+.admin-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cogtive-blue-light); font-weight: 600; margin-bottom: 0.6rem; }
+.admin-row { display: flex; gap: 0.6rem; align-items: center; }
+.admin-row input { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text-primary); font-family: inherit; font-size: 0.9rem; }
+.admin-row input:focus { outline: none; border-color: var(--cogtive-blue); }
+.admin-btn { background: var(--cogtive-blue); color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 8px; font-family: inherit; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.85rem; }
+.admin-btn:hover { background: var(--cogtive-blue-dark); transform: translateY(-1px); }
+.admin-btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-secondary); }
+.admin-btn.ghost:hover { border-color: var(--cogtive-blue); color: var(--cogtive-blue-light); }
+.admin-status { font-size: 0.8rem; margin-top: 0.6rem; min-height: 1.2em; }
+.admin-status.ok { color: var(--accent-green); }
+.admin-status.err { color: var(--accent-red); }
+.admin-current { display: flex; justify-content: space-between; font-size: 0.82rem; background: rgba(0,102,255,0.06); padding: 0.7rem 0.9rem; border-radius: 8px; border: 1px solid rgba(0,102,255,0.15); margin-bottom: 0.8rem; }
+.admin-current span:first-child { color: var(--text-muted); }
+.admin-current span:last-child { font-family: 'JetBrains Mono', monospace; color: var(--cogtive-blue-light); font-weight: 600; }
+.admin-help { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.8rem; line-height: 1.5; }
+.admin-help code { font-family: 'JetBrains Mono', monospace; background: rgba(0,102,255,0.1); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--cogtive-blue-light); }
+
+/* APP */
+#app.hidden { display: none; }
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--cogtive-blue), var(--accent-teal)); z-index: 900; transition: width 0.1s linear; width: 0%; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 800; padding: 1rem 3rem; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(20px); background: rgba(10,14,26,0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.nav-logo { height: 28px; width: auto; display: block; object-fit: contain; }
+svg.nav-logo { height: 28px; width: auto; display: block; }
+.nav-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+.nav-logout { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); background: transparent; border: 1px solid rgba(255,255,255,0.08); padding: 0.4rem 0.8rem; border-radius: 100px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
+.nav-logout:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.2); }
+
+/* SECTIONS BASE */
+section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 3rem; position: relative; }
+.section-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+.section-label { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--cogtive-blue-light); font-weight: 600; margin-bottom: 1rem; }
+.section-label::before { content: ''; width: 30px; height: 2px; background: var(--cogtive-blue); }
+.section-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1rem; }
+.section-desc { font-size: 1.1rem; color: var(--text-secondary); max-width: 720px; line-height: 1.7; font-weight: 300; }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(60px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+.reveal-delay-5 { transition-delay: 0.75s; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -30%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, var(--cogtive-blue-glow) 0%, transparent 70%); animation: pulse-glow 6s ease-in-out infinite; }
+@keyframes pulse-glow { 0%,100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } }
+.hero-content { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,102,255,0.1); border: 1px solid rgba(0,102,255,0.3); padding: 0.5rem 1.2rem; border-radius: 100px; font-size: 0.85rem; color: var(--cogtive-blue-light); font-weight: 500; margin-bottom: 2rem; }
+.hero-badge .dot { width: 8px; height: 8px; background: var(--cogtive-blue); border-radius: 50%; animation: dot-pulse 2s ease-in-out infinite; }
+@keyframes dot-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero h1 { font-size: clamp(2.8rem,6vw,5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.5rem; }
+.hero h1 .highlight { background: linear-gradient(135deg, var(--cogtive-blue), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 1.3rem; color: var(--text-secondary); max-width: 720px; line-height: 1.6; font-weight: 300; }
+.hero-metrics { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
+.hero-metric .number { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--cogtive-blue-light); line-height: 1; }
+.hero-metric .number .unit { font-size: 1.4rem; color: var(--text-muted); font-weight: 400; }
+.hero-metric .label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+
+/* PARTICLES */
+.particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.particle { position: absolute; background: rgba(0,102,255,0.55); border-radius: 50%; animation: floatUp 22s infinite linear; }
+@keyframes floatUp { 0% { transform: translateY(100vh) translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-10vh) translateX(40px); opacity: 0; } }
+
+/* FLOW */
+.flow-container { margin-top: 3rem; position: relative; }
+.flow-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.8rem; position: relative; z-index: 1; }
+.flow-step { text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); padding: 0.3rem; }
+.flow-step.active { opacity: 1; transform: translateY(0); }
+.flow-step.flow-no-cogtive { opacity: 0; }
+.flow-step.flow-no-cogtive.active { opacity: 0.45; }
+.flow-icon { width: 72px; height: 72px; margin: 0 auto 0.7rem; background: var(--dark-surface); border: 2px solid rgba(255,255,255,0.06); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; transition: all 0.4s ease; }
+.flow-step.has-cogtive .flow-icon { border-color: var(--cogtive-blue); background: rgba(0,102,255,0.08); box-shadow: 0 0 20px rgba(0,102,255,0.12); }
+.flow-step-name { font-weight: 600; font-size: 0.78rem; margin-bottom: 0.25rem; letter-spacing: -0.2px; line-height: 1.2; }
+.flow-step-detail { font-size: 0.66rem; color: var(--text-muted); line-height: 1.3; }
+.cogtive-wrapper { position: relative; border: 2px solid var(--cogtive-blue); border-radius: 24px; padding: 2.5rem 1rem 1.5rem; margin-top: 0.5rem; background: rgba(0,102,255,0.03); box-shadow: 0 0 40px rgba(0,102,255,0.08), inset 0 0 40px rgba(0,102,255,0.02); }
+.cogtive-wrapper-label { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--dark); padding: 0.3rem 1.5rem; border: 2px solid var(--cogtive-blue); border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--cogtive-blue-light); white-space: nowrap; display: flex; align-items: center; gap: 0.5rem; }
+.cogtive-wrapper-modules { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(0,102,255,0.15); flex-wrap: wrap; }
+.cogtive-wrapper-module { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem 1rem; background: rgba(0,102,255,0.1); border: 1px solid rgba(0,102,255,0.25); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: var(--cogtive-blue-light); letter-spacing: 0.3px; }
+
+/* PROBLEM */
+.problem-section { background: linear-gradient(180deg, var(--dark) 0%, #0F1629 100%); }
+.pain-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.pain-card { background: var(--dark-surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 2rem 1.7rem; position: relative; overflow: hidden; transition: all 0.4s ease; }
+.pain-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent-red); opacity: 0.7; }
+.pain-card:hover { transform: translateY(-5px); border-color: rgba(239,68,68,0.25); box-shadow: 0 18px 50px rgba(0,0,0,0.3); }
+.pain-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-red); font-weight: 700; letter-spacing: 2px; margin-bottom: 0.5rem; }
+.pain-card h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; line-height: 1.25; letter-spacing: -0.3px; }
+.pain-card .pain-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 1rem; }
+.pain-card .pain-impact { font-size: 0.76rem; color: var(--text-muted); font-style: italic; padding: 0.7rem 0.9rem; background: rgba(239,68,68,0.05); border-radius: 8px; border-left: 2px solid var(--accent-red); line-height: 1.5; }
+.pain-highlight { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: #FCA5A5; padding: 0.2rem 0.5rem; border-radius: 6px; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; }
+.pain-exec { margin-top: 3rem; padding: 2rem 2.5rem; background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(245,158,11,0.06)); border: 1px solid rgba(239,68,68,0.15); border-radius: 18px; display: flex; align-items: flex-start; gap: 1.5rem; }
+.pain-exec .ex-icon { width: 48px; height: 48px; background: rgba(239,68,68,0.18); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.pain-exec h5 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-red); font-weight: 700; margin-bottom: 0.4rem; }
+.pain-exec p { font-size: 1rem; color: var(--text-primary); line-height: 1.55; font-weight: 500; }
+.pain-exec p strong { color: #FCA5A5; }
+
+/* SOLUTION */
+.cogtive-entry { background: linear-gradient(180deg, #0F1629 0%, var(--dark) 100%); }
+.modules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
+.module-card { background: var(--dark-surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: all 0.5s ease; }
+.module-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cogtive-blue), var(--accent-teal)); opacity: 0; transition: opacity 0.4s ease; }
+.module-card:hover::before { opacity: 1; }
+.module-card:hover { border-color: rgba(0,102,255,0.2); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.module-number { font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.04); position: absolute; top: 1rem; right: 1.5rem; }
+.module-icon { width: 56px; height: 56px; background: rgba(0,102,255,0.1); border: 1px solid rgba(0,102,255,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; }
+.module-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+.module-card .module-sub { font-size: 0.8rem; color: var(--cogtive-blue-light); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+.module-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
+.module-features { display: flex; flex-direction: column; gap: 0.6rem; }
+.module-feature { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
+.module-feature .check { width: 20px; height: 20px; background: rgba(16,185,129,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--accent-green); flex-shrink: 0; margin-top: 0.1rem; }
+
+/* TIMELINE */
+.timeline-detail { margin-top: 3rem; }
+.timeline-visual { background: var(--dark-surface); border-radius: 20px; padding: 2.5rem; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; }
+.timeline-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.timeline-header h4 { font-size: 1rem; font-weight: 600; }
+.timeline-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.timeline-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted); }
+.timeline-legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+.timeline-bars { display: flex; flex-direction: column; gap: 0.5rem; }
+.timeline-row { display: flex; align-items: center; gap: 1rem; height: 40px; }
+.timeline-row-label { width: 110px; font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); text-align: right; flex-shrink: 0; letter-spacing: -0.2px; }
+.timeline-row-bar { flex: 1; height: 28px; background: rgba(255,255,255,0.03); border-radius: 6px; overflow: hidden; display: flex; }
+.tl-segment { height: 100%; transition: width 1.5s cubic-bezier(0.16,1,0.3,1); display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: white; width: 0%; }
+.tl-producing { background: var(--accent-green); }
+.tl-stopped { background: var(--accent-red); }
+.tl-setup { background: var(--accent-orange); }
+.tl-micro { background: var(--accent-purple); }
+.timeline-alert { margin-top: 1.5rem; padding: 1rem 1.5rem; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary); }
+.timeline-alert strong { color: var(--accent-red); }
+
+/* OEE */
+.oee-dashboard { margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.oee-gauge { background: var(--dark-surface); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255,255,255,0.06); text-align: center; }
+.gauge-container { width: 160px; height: 160px; margin: 0 auto 1.5rem; position: relative; }
+.gauge-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gauge-bg { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 10; }
+.gauge-fill { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1); }
+.gauge-value { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; font-weight: 700; }
+.gauge-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+.gauge-sublabel { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.3rem; }
+.oee-formula { margin-top: 2.5rem; padding: 1.5rem 2rem; background: rgba(0,102,255,0.05); border: 1px solid rgba(0,102,255,0.2); border-radius: 14px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--text-secondary); letter-spacing: 0.5px; }
+.oee-formula .eq { color: var(--cogtive-blue-light); font-weight: 600; font-size: 1.1rem; }
+
+/* AI VISION */
+.aivision-section { background: linear-gradient(180deg, var(--dark) 0%, #0A1628 100%); }
+.av-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 100px; font-size: 0.72rem; font-weight: 600; color: var(--accent-purple); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 1rem; }
+.av-grid { margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.av-photo-wrap { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); aspect-ratio: 16/9; background: var(--dark-surface); }
+.av-photo-wrap img, .av-photo-wrap svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.av-photo-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(10,14,26,0.85) 100%); pointer-events: none; }
+.av-tag { position: absolute; top: 1rem; left: 1rem; padding: 0.35rem 0.8rem; background: rgba(0,102,255,0.9); color: white; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 100px; z-index: 2; }
+.av-caption { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 2; }
+.av-caption h5 { font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 0.2rem; letter-spacing: -0.3px; }
+.av-caption p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; }
+.av-rule { margin-top: 2rem; padding: 1.5rem 2rem; background: rgba(139,92,246,0.07); border: 1px solid rgba(139,92,246,0.2); border-radius: 14px; display: flex; gap: 1.3rem; align-items: center; }
+.av-rule-icon { font-size: 1.6rem; width: 52px; height: 52px; background: rgba(139,92,246,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.av-rule h5 { font-size: 0.92rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 0.2rem; letter-spacing: 0.3px; }
+.av-rule p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; }
+.av-rule p strong { color: var(--text-primary); }
+.av-capabilities { margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.av-cap { padding: 1.2rem 1.3rem; background: var(--dark-surface); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; }
+.av-cap .cap-icon { width: 36px; height: 36px; background: rgba(139,92,246,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 0.8rem; }
+.av-cap h6 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; letter-spacing: -0.2px; }
+.av-cap p { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ROI */
+.roi-section { background: linear-gradient(180deg, var(--dark) 0%, #0A1628 50%, var(--dark) 100%); }
+.roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: start; }
+.roi-pillars { display: flex; flex-direction: column; gap: 1rem; }
+.roi-pillar { display: flex; align-items: center; gap: 1.2rem; padding: 1.3rem 1.5rem; background: var(--dark-surface); border-radius: 14px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; }
+.roi-pillar:hover { border-color: rgba(0,102,255,0.2); transform: translateX(4px); }
+.roi-pillar .p-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(0,102,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+.roi-pillar h5 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.2rem; letter-spacing: -0.2px; }
+.roi-pillar p { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45; }
+.roi-total { background: linear-gradient(135deg, rgba(0,102,255,0.15), rgba(20,184,166,0.15)); border: 1px solid rgba(0,102,255,0.3); padding: 2.5rem; border-radius: 20px; text-align: center; position: sticky; top: 100px; }
+.roi-total .r-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.8rem; font-weight: 600; }
+.roi-total .r-headline { font-size: 1.3rem; font-weight: 700; line-height: 1.3; margin-bottom: 1.5rem; letter-spacing: -0.3px; }
+.roi-total .r-note { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin-top: 1rem; text-align: left; }
+.roi-total .r-pills { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0; }
+.roi-total .r-pill { padding: 0.9rem 1rem; background: rgba(255,255,255,0.04); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 0.8rem; text-align: left; }
+.roi-total .r-pill-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(0,102,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.roi-total .r-pill h6 { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.15rem; }
+.roi-total .r-pill p { font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; }
+
+/* JOURNEY */
+.journey-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 3rem; }
+.journey-step { padding: 2rem 1.5rem; position: relative; background: var(--dark-surface); border: 1px solid rgba(255,255,255,0.06); }
+.journey-step:first-child { border-radius: 20px 0 0 20px; }
+.journey-step:last-child { border-radius: 0 20px 20px 0; }
+.journey-step:not(:last-child) { border-right: none; }
+.journey-step-number { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--cogtive-blue); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1.5px; }
+.journey-step h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; letter-spacing: -0.3px; }
+.journey-step .time-badge { display: inline-block; font-size: 0.68rem; padding: 0.2rem 0.7rem; background: rgba(0,102,255,0.1); border-radius: 100px; color: var(--cogtive-blue-light); font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 0.5px; }
+.journey-step p { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.55; }
+.journey-arrow { position: absolute; right: -12px; top: 50%; transform: translateY(-50%); z-index: 2; width: 24px; height: 24px; background: var(--cogtive-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: white; }
+
+/* CTA */
+.cta-section { text-align: center; position: relative; overflow: hidden; padding: 8rem 3rem; background: linear-gradient(180deg, var(--dark) 0%, #091230 100%); }
+.cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, var(--cogtive-blue-glow) 0%, transparent 65%); animation: pulse-glow 6s ease-in-out infinite; }
+.cta-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+.cta-section h2 { font-size: clamp(2.3rem,5vw,3.8rem); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 1.2rem; }
+.cta-section h2 .highlight { background: linear-gradient(135deg, var(--cogtive-blue-light), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta-section p { font-size: 1.15rem; color: var(--text-secondary); max-width: 620px; margin: 0 auto 2.5rem; line-height: 1.6; font-weight: 300; }
+.cta-button { display: inline-flex; align-items: center; gap: 0.7rem; padding: 1.3rem 2.8rem; background: linear-gradient(135deg, var(--cogtive-blue), var(--cogtive-blue-dark)); color: white; text-decoration: none; border-radius: 100px; font-weight: 700; font-size: 1.05rem; transition: all 0.3s ease; letter-spacing: 0.3px; box-shadow: 0 15px 40px rgba(0,102,255,0.3); }
+.cta-button:hover { transform: translateY(-3px); box-shadow: 0 20px 55px rgba(0,102,255,0.5); }
+.cta-button .wa-icon { width: 22px; height: 22px; }
+.cta-logos { display: flex; align-items: center; justify-content: center; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
+.cta-logos img.logo-cogtive, svg.logo-cogtive { height: 38px; opacity: 0.9; width: auto; display: block; }
+.cta-logos .logo-x { font-size: 1.4rem; color: var(--text-muted); font-weight: 300; }
+.cta-logos .logo-client-wrap { background: #000; padding: 0.6rem 1rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); display: flex; align-items: center; }
+.cta-logos .logo-client-wrap img, .cta-logos .logo-client-wrap svg { height: 56px; display: block; width: auto; }
+.cta-sig { margin-top: 2rem; font-size: 0.78rem; color: var(--text-muted); letter-spacing: 1px; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 1rem 2rem; }
+  section { padding: 5rem 2rem; }
+  .modules-grid, .pain-grid, .oee-dashboard, .av-capabilities { grid-template-columns: repeat(2, 1fr); }
+  .av-grid { grid-template-columns: 1fr; }
+  .roi-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .journey-steps { grid-template-columns: 1fr 1fr; }
+  .journey-step:nth-child(2) { border-radius: 0 20px 0 0; border-right: 1px solid rgba(255,255,255,0.06); }
+  .journey-step:nth-child(3) { border-radius: 0 0 0 20px; }
+  .journey-step:nth-child(1) { border-radius: 20px 0 0 0; }
+  .flow-steps { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0.8rem 1.2rem; }
+  .nav-label { display: none; }
+  section { padding: 4rem 1.2rem; }
+  .hero h1 { letter-spacing: -1px; }
+  .hero-metrics { gap: 1.5rem; }
+  .modules-grid, .pain-grid, .oee-dashboard, .av-capabilities { grid-template-columns: 1fr; }
+  .journey-steps { grid-template-columns: 1fr; }
+  .journey-step { border-radius: 0 !important; border: 1px solid rgba(255,255,255,0.06) !important; margin-bottom: 0.5rem; }
+  .journey-step:first-child { border-radius: 20px 20px 0 0 !important; }
+  .journey-step:last-child { border-radius: 0 0 20px 20px !important; }
+  .journey-arrow { display: none; }
+  .flow-steps { grid-template-columns: repeat(2, 1fr); }
+  .cogtive-wrapper .flow-steps { grid-template-columns: repeat(2, 1fr); }
+  .oee-formula { font-size: 0.8rem; padding: 1.2rem 1rem; }
+  .cta-logos { gap: 1.2rem; }
+  .login-card { padding: 2.2rem 1.5rem; }
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- LOGIN -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <img class="login-logo" src="Cogtive_Logo_Off_White.png" alt="Cogtive"/>
+    <h2>Apresentação Exclusiva</h2>
+    <p class="login-sub">Este conteúdo foi preparado especialmente para <strong style="color:var(--text-primary)">Guilherme Penha — Defelipe / Vovó Mocinha</strong>. Use as credenciais enviadas para acessar.</p>
+    <form class="login-form" id="loginForm" autocomplete="off">
+      <div class="login-field">
+        <label>E-mail</label>
+        <input type="email" id="loginEmail" placeholder="seu@email.com" required autocomplete="off"/>
+      </div>
+      <div class="login-field">
+        <label>Senha</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="off"/>
+      </div>
+      <button type="submit" class="login-submit">Entrar</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+    <div class="login-footer">
+      <span class="hint">Acesso restrito</span>
+      <span>Cogtive · 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-card">
+    <button class="admin-close" id="adminClose" aria-label="Fechar">×</button>
+    <h3>Painel Admin <span class="tag">Cogtive</span></h3>
+    <p class="admin-sub">Controle de acesso desta apresentação. Requer master password.</p>
+    <div id="adminGate">
+      <div class="admin-section" style="border-top:none;padding-top:0;">
+        <div class="admin-label">Master Password</div>
+        <div class="admin-row">
+          <input type="password" id="adminMaster" placeholder="Digite a senha master"/>
+          <button class="admin-btn" id="adminUnlock">Desbloquear</button>
+        </div>
+        <div class="admin-status err" id="adminGateStatus"></div>
+      </div>
+    </div>
+    <div id="adminPanel" style="display:none">
+      <div class="admin-section" style="border-top:none;padding-top:0;">
+        <div class="admin-label">Status atual</div>
+        <div class="admin-current"><span>E-mail autorizado</span><span>guilhermepenha@vovomocinha.com.br</span></div>
+        <div class="admin-current"><span>Senha ativa</span><span id="adminCurrentPwd">••••••••</span></div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-label">Trocar senha do lead</div>
+        <div class="admin-row">
+          <input type="text" id="adminNewPwd" placeholder="Nova senha (mín. 4 caracteres)"/>
+          <button class="admin-btn" id="adminSavePwd">Trocar</button>
+        </div>
+        <div class="admin-status" id="adminStatus"></div>
+        <p class="admin-help">A troca é <strong>persistida neste navegador</strong> (localStorage). Para aplicar em outra máquina, regenere o HTML com a nova senha inicial.<br/>Atalho: <code>Ctrl + Shift + A</code> abre este painel a qualquer momento.</p>
+      </div>
+      <div class="admin-section">
+        <div class="admin-label">Ações</div>
+        <div class="admin-row" style="flex-wrap:wrap;gap:0.5rem;">
+          <button class="admin-btn ghost" id="adminReset">Resetar p/ senha inicial</button>
+          <button class="admin-btn ghost" id="adminReveal">Revelar senha atual</button>
+          <button class="admin-btn ghost" id="adminLogout">Deslogar lead</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="particles" id="particles"></div>
+
+  <nav>
+    <img class="nav-logo" src="Cogtive_Logo_Off_White.png" alt="Cogtive"/>
+    <span class="nav-label">Vovó Mocinha · Maio 2026</span>
+    <button class="nav-logout" id="navLogout" onclick="logoutLead()">Sair</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge reveal"><span class="dot"></span> Apresentação preparada para Vovó Mocinha · Maio 2026</div>
+      <h1 class="reveal reveal-delay-1">
+        Quando a manutenção surpreende,<br/>
+        a <span class="highlight">hora extra paga a conta</span>.
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Guilherme, em 30 anos a Vovó Mocinha consolidou marca, qualidade e mix de pão de queijo e salgados.
+        O próximo salto não é fazer mais — é <strong style="color:var(--text-primary)">enxergar a operação em tempo real</strong>:
+        cada parada, cada manutenção, cada minuto de hora extra que hoje some na planilha.
+      </p>
+      <div class="hero-metrics reveal reveal-delay-3">
+        <div class="hero-metric">
+          <div class="number"><span class="count-up" data-target="10">0</span></div>
+          <div class="label">Máquinas automatizadas</div>
+        </div>
+        <div class="hero-metric">
+          <div class="number"><span class="count-up" data-target="2">0</span></div>
+          <div class="label">Turnos / dia</div>
+        </div>
+        <div class="hero-metric">
+          <div class="number"><span class="count-up" data-target="30">0</span></div>
+          <div class="label">Pessoas no chão</div>
+        </div>
+        <div class="hero-metric">
+          <div class="number"><span class="count-up" data-target="30">0</span><span class="unit">+ anos</span></div>
+          <div class="label">De marca consolidada</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section id="flow">
+    <div class="section-inner">
+      <div class="section-label reveal">01 — Seu processo produtivo</div>
+      <h2 class="section-title reveal reveal-delay-1">Da massa congelada à expedição — onde a parada de manutenção corrói o plano.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        A Vovó Mocinha opera duas frentes integradas: linha de produção (mistura, modelagem, congelamento) e linha de embalagem.
+        Cada quebra inesperada em qualquer ponto reflete em hora extra para fechar o programado do dia.
+      </p>
+      <div class="flow-container reveal reveal-delay-3" id="flowContainer">
+        <div class="flow-steps" style="margin-bottom:1rem;">
+          <div class="flow-step flow-no-cogtive" data-delay="0">
+            <div class="flow-icon">🌾</div>
+            <div class="flow-step-name">Matéria-prima</div>
+            <div class="flow-step-detail">Polvilho, queijo, recheios</div>
+          </div>
+          <div class="flow-step flow-no-cogtive" data-delay="100">
+            <div class="flow-icon">🥣</div>
+            <div class="flow-step-name">Mistura</div>
+            <div class="flow-step-detail">Massa pronta para modelar</div>
+          </div>
+        </div>
+        <div class="cogtive-wrapper">
+          <div class="cogtive-wrapper-label">
+            <span style="color:var(--cogtive-blue-light);">●</span> Monitoramento Cogtive — produção e embalagem
+          </div>
+          <div class="flow-steps">
+            <div class="flow-step has-cogtive" data-delay="300">
+              <div class="flow-icon">⚙️</div>
+              <div class="flow-step-name">Modelagem</div>
+              <div class="flow-step-detail">Bolinhas, salgados, mini</div>
+            </div>
+            <div class="flow-step has-cogtive" data-delay="420" style="position:relative;">
+              <div class="flow-icon">❄️</div>
+              <div class="flow-step-name">Congelamento</div>
+              <div class="flow-step-detail">Túnel / câmara — gargalo crítico</div>
+            </div>
+            <div class="flow-step has-cogtive" data-delay="540">
+              <div class="flow-icon">📦</div>
+              <div class="flow-step-name">Embalagem</div>
+              <div class="flow-step-detail">Linha automatizada · 10 máq.</div>
+            </div>
+            <div class="flow-step has-cogtive" data-delay="660">
+              <div class="flow-icon">🔍</div>
+              <div class="flow-step-name">Inspeção</div>
+              <div class="flow-step-detail">Peso, selagem, validade</div>
+            </div>
+            <div class="flow-step has-cogtive" data-delay="780">
+              <div class="flow-icon">🚚</div>
+              <div class="flow-step-name">Paletização / Expedição</div>
+              <div class="flow-step-detail">Carga refrigerada</div>
+            </div>
+          </div>
+          <div class="cogtive-wrapper-modules">
+            <div class="cogtive-wrapper-module"><span class="mod-icon">📊</span> OEE em Tempo Real</div>
+            <div class="cogtive-wrapper-module"><span class="mod-icon">⏱️</span> Timeline</div>
+            <div class="cogtive-wrapper-module"><span class="mod-icon">🛠️</span> Manutenção</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem-section" id="problem">
+    <div class="section-inner">
+      <div class="section-label reveal">02 — O desafio da Vovó Mocinha</div>
+      <h2 class="section-title reveal reveal-delay-1"><span style="color:var(--accent-red);">Planilha não para máquina</span> — e nem mostra por que ela parou.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        Guilherme, hoje a operação tem dois pontos que a planilha manual não consegue resolver:
+        <strong>manutenção que aparece como surpresa</strong> e <strong>hora extra recorrente</strong> para fechar o programado.
+        São sintomas do mesmo problema — falta de dado em tempo real para reagir antes que vire prejuízo.
+      </p>
+      <div class="pain-grid">
+        <div class="pain-card reveal reveal-delay-1" style="border-top:3px solid var(--accent-red);">
+          <div class="pain-num">DOR 01</div>
+          <h4>Manutenção corretiva domina o turno</h4>
+          <div class="pain-desc">
+            Sem histórico estruturado de falhas e sem alerta antecipado, a manutenção entra em campo
+            <span class="pain-highlight">depois</span> que a máquina parou. As 10 máquinas da linha automatizada
+            disputam o mesmo time — e a fila de espera vira tempo de máquina parada.
+          </div>
+          <div class="pain-impact">
+            <strong>Impacto:</strong> Disponibilidade abaixo do potencial. Programado do turno escorrega para a noite.
+          </div>
+        </div>
+        <div class="pain-card reveal reveal-delay-2" style="border-top:3px solid var(--accent-orange);">
+          <div class="pain-num">DOR 02</div>
+          <h4>Hora extra para fechar o planejamento</h4>
+          <div class="pain-desc">
+            Quando a manutenção come o turno, a saída é <span class="pain-highlight">esticar a mão de obra</span>.
+            Hora extra vira recorrente — para quem opera, para quem supervisiona, para quem coordena a expedição refrigerada.
+            E mês a mês, isso entra direto na planilha de custo da Vovó Mocinha.
+          </div>
+          <div class="pain-impact">
+            <strong>Impacto:</strong> Margem comprimida em produto que já tem custo de matéria-prima sensível. Time desgastado.
+          </div>
+        </div>
+        <div class="pain-card reveal reveal-delay-3" style="border-top:3px solid var(--accent-purple);">
+          <div class="pain-num">DOR 03</div>
+          <h4>Apontamento manual em planilha</h4>
+          <div class="pain-desc">
+            O que a operação registra hoje em planilha chega tarde, com gaps, e sem o detalhe de
+            <strong>onde</strong> o tempo foi perdido. Não dá para atacar uma microparada que ninguém viu —
+            nem para provar para a diretoria onde está o gargalo real.
+          </div>
+          <div class="pain-impact">
+            <strong>Impacto:</strong> Decisão tomada com base em sensação, não em dado. Mesmas perdas se repetem.
+          </div>
+        </div>
+      </div>
+      <div class="pain-exec reveal reveal-delay-3">
+        <div class="ex-icon">🎯</div>
+        <div>
+          <h5>Leitura executiva — o que a Cogtive entrega diferente</h5>
+          <p>
+            A Vovó Mocinha já tem o que muita indústria não tem: <strong>marca, mix consolidado e linha automatizada</strong>.
+            O que falta é a camada digital que liga as 10 máquinas a um único painel,
+            transforma cada parada em evento cronometrado e mostra <strong>onde a hora extra está nascendo</strong> —
+            antes de virar conta no fim do mês.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="cogtive-entry" id="solution">
+    <div class="section-inner">
+      <div class="section-label reveal">03 — A solução Cogtive</div>
+      <h2 class="section-title reveal reveal-delay-1">Dois módulos que <span style="background:linear-gradient(135deg,var(--cogtive-blue),var(--accent-teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">tiram o achismo da operação</span>.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        OEE mostra o que está acontecendo em tempo real — sem depender de planilha.
+        Timeline mostra <em>onde</em> o tempo foi gasto em cada turno: produção, manutenção, microparada, troca.
+        Juntos, eles dão à Vovó Mocinha o controle que substitui a hora extra por planejamento.
+      </p>
+      <div class="modules-grid">
+        <div class="module-card reveal reveal-delay-1">
+          <div class="module-number">01</div>
+          <div class="module-icon">📊</div>
+          <div class="module-sub">Módulo Principal</div>
+          <h3>OEE em Tempo Real</h3>
+          <p>Substitui o apontamento em planilha. Coleta automática nas 10 máquinas da linha automatizada — disponibilidade, performance e qualidade calculadas em tempo real, sem depender de digitação.</p>
+          <div class="module-features">
+            <div class="module-feature"><span class="check">✓</span><span>Coleta automática — <strong>fim do apontamento manual</strong></span></div>
+            <div class="module-feature"><span class="check">✓</span><span>Disponibilidade real por máquina, por turno (manhã / tarde)</span></div>
+            <div class="module-feature"><span class="check">✓</span><span>Histórico estruturado de paradas — corretivas e preventivas</span></div>
+            <div class="module-feature"><span class="check">✓</span><span>Painel de produção visível para chão de fábrica e diretoria</span></div>
+          </div>
+        </div>
+        <div class="module-card reveal reveal-delay-2">
+          <div class="module-number">02</div>
+          <div class="module-icon">⏱️</div>
+          <div class="module-sub">Módulo Principal</div>
+          <h3>Timeline de Produção</h3>
+          <p>Linha do tempo de cada máquina — minuto a minuto, do início ao fim do turno. Mostra exatamente onde a manutenção entrou, quanto tempo durou, e se o programado vai fechar sem hora extra.</p>
+          <div class="module-features">
+            <div class="module-feature"><span class="check">✓</span><span>Visualização clara: <strong>produção, manutenção, microparada, setup</strong></span></div>
+            <div class="module-feature"><span class="check">✓</span><span>Alerta em tempo real quando a parada ameaça o programado</span></div>
+            <div class="module-feature"><span class="check">✓</span><span>Cadeia de ajuda — supervisor avisado antes de virar hora extra</span></div>
+            <div class="module-feature"><span class="check">✓</span><span>Base de dados para evoluir a manutenção de corretiva para preventiva</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline-section">
+    <div class="section-inner">
+      <div class="section-label reveal">04 — Timeline em ação</div>
+      <h2 class="section-title reveal reveal-delay-1">Um turno real na Vovó Mocinha — e onde a manutenção aparece.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        Exemplo de turno da manhã em 5 das 10 máquinas da linha. Observe os blocos
+        <span style="color:var(--accent-red);font-weight:600;">PARADA</span> em vermelho (manutenção)
+        e <span style="color:var(--accent-purple);font-weight:600;">MICRO</span> em roxo (microparadas).
+        Hoje isso vira hora extra à noite; com a Cogtive, vira <strong>alerta no celular do supervisor às 9h</strong>.
+      </p>
+      <div class="timeline-detail reveal reveal-delay-3">
+        <div class="timeline-visual" id="timelineVisual">
+          <div class="timeline-header">
+            <h4>Turno Manhã — 06:00 às 14:00 · Vovó Mocinha</h4>
+            <div class="timeline-legend">
+              <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-green)"></span>Produzindo</div>
+              <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-red)"></span>Manutenção / Parada</div>
+              <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-orange)"></span>Setup / Troca</div>
+              <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-purple)"></span>Microparada</div>
+            </div>
+          </div>
+          <div class="timeline-bars">
+            <div class="timeline-row"><div class="timeline-row-label">EMBAL-01</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-width="22">3h</div><div class="tl-segment tl-stopped" data-width="14">MANUT</div><div class="tl-segment tl-producing" data-width="18">2,5h</div><div class="tl-segment tl-micro" data-width="4"></div><div class="tl-segment tl-producing" data-width="20">resto</div><div class="tl-segment tl-setup" data-width="6">SETUP</div><div class="tl-segment tl-producing" data-width="16">final</div></div></div>
+            <div class="timeline-row"><div class="timeline-row-label">EMBAL-02</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-width="28">4h</div><div class="tl-segment tl-micro" data-width="3"></div><div class="tl-segment tl-producing" data-width="20">3h</div><div class="tl-segment tl-stopped" data-width="9">PARADA</div><div class="tl-segment tl-producing" data-width="22">resto</div><div class="tl-segment tl-micro" data-width="3"></div><div class="tl-segment tl-producing" data-width="15">final</div></div></div>
+            <div class="timeline-row"><div class="timeline-row-label">MODEL-03</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-width="18">2,5h</div><div class="tl-segment tl-setup" data-width="6">SETUP</div><div class="tl-segment tl-producing" data-width="22">3h</div><div class="tl-segment tl-stopped" data-width="11">MANUT</div><div class="tl-segment tl-producing" data-width="20">3h</div><div class="tl-segment tl-micro" data-width="3"></div><div class="tl-segment tl-producing" data-width="20">final</div></div></div>
+            <div class="timeline-row"><div class="timeline-row-label">MODEL-04</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-width="32">4,5h</div><div class="tl-segment tl-stopped" data-width="7">PARADA</div><div class="tl-segment tl-producing" data-width="24">3h</div><div class="tl-segment tl-micro" data-width="4"></div><div class="tl-segment tl-producing" data-width="18">2h</div><div class="tl-segment tl-micro" data-width="3"></div><div class="tl-segment tl-producing" data-width="12">final</div></div></div>
+            <div class="timeline-row"><div class="timeline-row-label">EMBAL-05</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-width="24">3,5h</div><div class="tl-segment tl-micro" data-width="4"></div><div class="tl-segment tl-producing" data-width="20">3h</div><div class="tl-segment tl-setup" data-width="6">SETUP</div><div class="tl-segment tl-producing" data-width="18">2,5h</div><div class="tl-segment tl-stopped" data-width="8">MANUT</div><div class="tl-segment tl-producing" data-width="20">final</div></div></div>
+          </div>
+          <div class="timeline-alert">
+            <span style="font-size:1.3rem;">🛠️</span>
+            <div>
+              <strong>Insight:</strong> só nas 5 máquinas do exemplo, a manutenção corretiva somou aproximadamente
+              <strong>2h45min de máquina parada</strong> neste turno.
+              Com 10 máquinas e 2 turnos, o efeito acumulado vira <strong>hora extra à noite para fechar o programado</strong> —
+              que a Cogtive transforma em alerta antecipado e plano de manutenção preventiva.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OEE -->
+  <section id="oee-section">
+    <div class="section-inner">
+      <div class="section-label reveal">05 — OEE em Tempo Real</div>
+      <h2 class="section-title reveal reveal-delay-1">A manutenção aparece aqui — no pilar que mais importa: <span style="color:var(--cogtive-blue-light)">Disponibilidade</span>.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        Exemplo de OEE típico de indústria de alimentos congelados com manutenção corretiva dominante.
+        Note: a <strong>Disponibilidade abaixo de 75%</strong> é o reflexo direto das paradas não programadas.
+        Cada ponto que sobe aqui é hora extra que <em>não</em> precisa acontecer à noite.
+      </p>
+      <div class="oee-dashboard reveal reveal-delay-3" id="oeeDashboard">
+        <div class="oee-gauge">
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 150 150">
+              <circle class="gauge-bg" cx="75" cy="75" r="65"/>
+              <circle class="gauge-fill" cx="75" cy="75" r="65" stroke="var(--accent-orange)" stroke-dasharray="408.41" stroke-dashoffset="408.41" data-target="118.44"/>
+            </svg>
+            <div class="gauge-value"><span class="count-up" data-target="71">0</span>%</div>
+          </div>
+          <div class="gauge-label">Disponibilidade</div>
+          <div class="gauge-sublabel" style="color:var(--accent-orange);">🛠️ Principal afetada por manutenção</div>
+        </div>
+        <div class="oee-gauge">
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 150 150">
+              <circle class="gauge-bg" cx="75" cy="75" r="65"/>
+              <circle class="gauge-fill" cx="75" cy="75" r="65" stroke="var(--accent-teal)" stroke-dasharray="408.41" stroke-dashoffset="408.41" data-target="61.26"/>
+            </svg>
+            <div class="gauge-value"><span class="count-up" data-target="85">0</span>%</div>
+          </div>
+          <div class="gauge-label">Performance</div>
+          <div class="gauge-sublabel">Velocidade real ÷ ideal</div>
+        </div>
+        <div class="oee-gauge">
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 150 150">
+              <circle class="gauge-bg" cx="75" cy="75" r="65"/>
+              <circle class="gauge-fill" cx="75" cy="75" r="65" stroke="var(--accent-green)" stroke-dasharray="408.41" stroke-dashoffset="408.41" data-target="16.34"/>
+            </svg>
+            <div class="gauge-value"><span class="count-up" data-target="96">0</span>%</div>
+          </div>
+          <div class="gauge-label">Qualidade</div>
+          <div class="gauge-sublabel">Peças conformes ÷ total</div>
+        </div>
+      </div>
+      <div class="oee-formula reveal reveal-delay-4">
+        <span class="eq">OEE = Disponibilidade × Performance × Qualidade</span>
+        <br/>71% × 85% × 96% = <span style="color:var(--accent-green);font-weight:700;">57,9%</span>
+        &nbsp;·&nbsp; Média da indústria brasileira ≈ 60% &nbsp;·&nbsp; World Class: 85%
+        <br/><span style="color:var(--accent-orange);font-size:0.95em;">▲ Reduzindo manutenção corretiva, Disponibilidade sobe para ~80% → OEE para ~65,3%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTROS PRODUTOS -->
+  <section class="aivision-section" id="aivision">
+    <div class="section-inner">
+      <div class="av-pill reveal">● Outros produtos Cogtive</div>
+      <h2 class="section-title reveal reveal-delay-1">Você pediu <span style="color:var(--accent-purple)">AI Vision</span> — e tem mais: <span style="color:var(--accent-teal)">Taelor</span>.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        Guilherme, você sinalizou interesse em AI Vision já no primeiro contato.
+        Faz total sentido para a Vovó Mocinha — aqui está como a gente recomenda encaixar, junto com o Taelor (IA operacional).
+      </p>
+      <div class="av-grid">
+        <div class="av-photo-wrap reveal reveal-delay-1">
+          <span class="av-tag" style="background:rgba(139,92,246,0.85);color:white;">AI Vision</span>
+          <img src="AI-Vision-Exemplo-1.png" alt="AI Vision — Posto de Trabalho"/>
+          <div class="av-caption">
+            <h5>Visão por estação de trabalho</h5>
+            <p>Câmeras identificam o posto em atividade e geram indicadores por estação — sem identificar pessoas. Útil em postos manuais de modelagem, embalagem e inspeção da Vovó Mocinha.</p>
+          </div>
+        </div>
+        <div class="av-photo-wrap reveal reveal-delay-2">
+          <span class="av-tag" style="background:rgba(20,184,166,0.85);color:white;">Taelor</span>
+          <img src="taelor.png" alt="Taelor — IA Operacional"/>
+          <div class="av-caption">
+            <h5>Decisões operacionais por IA</h5>
+            <p>O Taelor analisa os dados do OEE e sugere ações: melhor sequência de produção entre pão de queijo e salgados, previsão de manutenção, alertas preditivos antes da parada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="av-rule reveal reveal-delay-3">
+        <div class="av-rule-icon">💡</div>
+        <div>
+          <h5>ROTEIRO SUGERIDO PARA A VOVÓ MOCINHA</h5>
+          <p>
+            <strong>Fase 1:</strong> OEE + Timeline — eliminar a hora extra de manutenção.
+            <strong>Fase 2:</strong> AI Vision nos postos manuais (modelagem, inspeção, paletização).
+            <strong>Fase 3:</strong> Taelor para otimizar o sequenciamento entre pão de queijo e salgados, e antecipar manutenção.
+            Cada fase paga a próxima.
+          </p>
+        </div>
+      </div>
+      <div class="av-capabilities">
+        <div class="av-cap reveal reveal-delay-1">
+          <div class="cap-icon">📸</div>
+          <h6>AI Vision — Posto Automático</h6>
+          <p>Indicadores de produtividade por estação. Detecção de ocioso. Sem reconhecimento facial. Monitora a estação, não o operador.</p>
+        </div>
+        <div class="av-cap reveal reveal-delay-2">
+          <div class="cap-icon">🤖</div>
+          <h6>Taelor — IA Operacional</h6>
+          <p>Análise automática de OEE. Sugestão de sequência de produção. Alertas preditivos antes que a manutenção vire parada longa.</p>
+        </div>
+        <div class="av-cap reveal reveal-delay-3">
+          <div class="cap-icon">🔗</div>
+          <h6>Integração nativa</h6>
+          <p>OEE, Timeline, AI Vision e Taelor no mesmo painel. Dados que se conversam. Sem silos, sem ERP novo, sem refazer planilha.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="roi-section" id="roi">
+    <div class="section-inner">
+      <div class="section-label reveal">06 — Retorno</div>
+      <h2 class="section-title reveal reveal-delay-1">O que muda no <span style="color:var(--accent-green)">caixa da Vovó Mocinha</span>.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        Sem prometer número antes do diagnóstico — porque número conservador depende de medir o ponto de partida real.
+        O que dá para garantir é onde a Cogtive ataca primeiro. Cada um desses pilares tira pressão da hora extra.
+      </p>
+      <div class="roi-grid">
+        <div class="roi-pillars">
+          <div class="roi-pillar reveal reveal-delay-1">
+            <div class="p-icon">🛠️</div>
+            <div><h5>Manutenção corretiva → preventiva</h5><p>Histórico estruturado de falhas por máquina. Padrão vira plano. Quebra deixa de ser surpresa — e o time de manutenção entra no equipamento <strong>antes</strong> dele parar o turno.</p></div>
+          </div>
+          <div class="roi-pillar reveal reveal-delay-2">
+            <div class="p-icon">⏰</div>
+            <div><h5>Hora extra menor — e previsível</h5><p>Quando o supervisor enxerga em tempo real que o programado está em risco, ele aciona a cadeia de ajuda <strong>no meio do turno</strong>, não no fim. Hora extra cai para o que é planejado, não para o que é corrida.</p></div>
+          </div>
+          <div class="roi-pillar reveal reveal-delay-3">
+            <div class="p-icon">📊</div>
+            <div><h5>Adeus apontamento em planilha</h5><p>Coleta automática nas 10 máquinas. Operador volta a focar na máquina, supervisor volta a focar no time. Diretoria recebe dado fechado <strong>no minuto seguinte</strong>, não no fim do mês.</p></div>
+          </div>
+          <div class="roi-pillar reveal reveal-delay-4">
+            <div class="p-icon">📈</div>
+            <div><h5>Disponibilidade subindo de forma estruturada</h5><p>Em fábricas de alimentos parecidas, o OEE costuma subir 3 a 8 pontos no primeiro semestre — sem mexer em máquina. É fruto direto de visibilidade + cadeia de ajuda + redução de microparada.</p></div>
+          </div>
+          <div class="roi-pillar reveal reveal-delay-5">
+            <div class="p-icon">🧊</div>
+            <div><h5>Plano de produção que fecha no turno</h5><p>Sequência otimizada entre pão de queijo e salgados, considerando capacidade de congelamento e janelas de embalagem. Programado fecha — sem virar a noite.</p></div>
+          </div>
+        </div>
+        <div class="roi-total reveal reveal-delay-2">
+          <div class="r-label">Posição da Cogtive</div>
+          <div class="r-headline">A conta exata da Vovó Mocinha aparece <span style="color:var(--accent-green);">no diagnóstico</span>.</div>
+          <div class="r-pills">
+            <div class="r-pill">
+              <div class="r-pill-icon">📋</div>
+              <div>
+                <h6>Diagnóstico in loco — semana 1</h6>
+                <p>Mapeamos as 10 máquinas, cronometramos as paradas atuais e levantamos o tempo real de hora extra hoje.</p>
+              </div>
+            </div>
+            <div class="r-pill">
+              <div class="r-pill-icon">🎯</div>
+              <div>
+                <h6>Meta acordada com o Guilherme</h6>
+                <p>Definição conjunta da meta de Disponibilidade e da redução de hora extra esperada nos primeiros 90 dias.</p>
+              </div>
+            </div>
+            <div class="r-pill">
+              <div class="r-pill-icon">💰</div>
+              <div>
+                <h6>ROI em R$ — com seus números</h6>
+                <p>Receita recuperada e hora extra evitada calculadas com a planilha real da Vovó Mocinha, não com média de mercado.</p>
+              </div>
+            </div>
+          </div>
+          <p class="r-note">
+            <strong>Por que assim?</strong> Você falou que está em auditoria e que viaja este mês — sentido total respeitar isso.
+            Quando voltar, em 1 reunião curta a gente fecha o número de retorno usando os dados que a sua planilha já tem.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section id="journey">
+    <div class="section-inner">
+      <div class="section-label reveal">07 — Jornada de implementação</div>
+      <h2 class="section-title reveal reveal-delay-1">Quatro fases, sem parar uma máquina sequer.</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        A Cogtive entra em paralelo — sem impacto na produção atual.
+        A Vovó Mocinha continua entregando; a diferença é que a partir da Fase 03 cada parada já gera dado e alerta no celular do supervisor.
+      </p>
+      <div class="journey-steps">
+        <div class="journey-step reveal reveal-delay-1">
+          <div class="journey-step-number">FASE 01</div>
+          <h4>Diagnóstico</h4>
+          <span class="time-badge">1–2 semanas</span>
+          <p>Visita técnica em Ribeirão Pires. Mapa das 10 máquinas, pontos de coleta, perfil das paradas atuais. KPIs prioritários definidos com o Guilherme.</p>
+          <div class="journey-arrow">→</div>
+        </div>
+        <div class="journey-step reveal reveal-delay-2">
+          <div class="journey-step-number">FASE 02</div>
+          <h4>Implementação</h4>
+          <span class="time-badge">3–6 semanas</span>
+          <p>Coletores instalados sem parar a linha. Eventos de manutenção, microparada e setup configurados por máquina. Treinamento de supervisor, manutenção e diretoria.</p>
+          <div class="journey-arrow">→</div>
+        </div>
+        <div class="journey-step reveal reveal-delay-3">
+          <div class="journey-step-number">FASE 03</div>
+          <h4>Go-live + Ajuste</h4>
+          <span class="time-badge">2–4 semanas</span>
+          <p>Operação assistida. OEE no painel, Timeline calibrada, primeiros alertas de manutenção rodando. Adeus apontamento manual em planilha.</p>
+          <div class="journey-arrow">→</div>
+        </div>
+        <div class="journey-step reveal reveal-delay-4">
+          <div class="journey-step-number">FASE 04</div>
+          <h4>Ciclo contínuo</h4>
+          <span class="time-badge">On-going</span>
+          <p>Manutenção evoluindo de corretiva para preventiva. Hora extra entrando em controle. Plataforma cresce com a operação — AI Vision e Taelor na fase seguinte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="cta-inner">
+      <div class="section-label reveal" style="justify-content:center;">PRÓXIMO PASSO</div>
+      <h2 class="reveal reveal-delay-1">Quando você voltar da auditoria, a gente <span class="highlight">agenda 30 minutos</span>.</h2>
+      <p class="reveal reveal-delay-2">
+        Guilherme, sem pressa: você falou que está em viagem e auditoria este mês.
+        Quando puder, é só me chamar no WhatsApp — agendamos uma conversa rápida pra revisar o que faz sentido pra Vovó Mocinha
+        e, se rolar, marcar o diagnóstico in loco em Ribeirão Pires.
+      </p>
+      <a href="https://wa.me/5511910776523?text=Oi%20Eduardo%2C%20sou%20o%20Guilherme%20da%20Vov%C3%B3%20Mocinha.%20Vi%20a%20apresenta%C3%A7%C3%A3o%20Cogtive%20e%20quero%20conversar." class="cta-button reveal reveal-delay-3" target="_blank" rel="noopener">
+        <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Falar com Eduardo no WhatsApp
+      </a>
+      <div class="cta-logos reveal reveal-delay-4">
+        <img class="logo-cogtive" src="Cogtive_Logo_Off_White.png" alt="Cogtive"/>
+        <span class="logo-x">×</span>
+        <div class="logo-client-wrap">
+          <svg viewBox="0 0 480 160" xmlns="http://www.w3.org/2000/svg">
+            <rect width="480" height="160" fill="#000000"/>
+            <text x="240" y="38" font-family="Outfit, Arial, sans-serif" font-size="24" font-weight="700" fill="#E60019" text-anchor="middle" letter-spacing="0.5">Pão de Queijo &amp; Salgados</text>
+            <rect x="20" y="50" width="440" height="90" rx="8" fill="#E60019"/>
+            <text x="240" y="118" font-family="Pacifico, cursive" font-size="62" font-weight="400" fill="#FFFFFF" text-anchor="middle">Vovó Mocinha</text>
+            <text x="455" y="60" font-family="Outfit, Arial, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">®</text>
+          </svg>
+        </div>
+      </div>
+      <div class="cta-sig reveal reveal-delay-5">Proposta preparada para Guilherme Penha · Vovó Mocinha · Maio 2026</div>
+    </div>
+  </section>
+
+</div><!-- #app -->
+
+<script>
+const AUTH = {
+  authorizedEmail: 'guilhermepenha@vovomocinha.com.br',
+  defaultPassword: 'Cogtive123',
+  masterPassword: 'Cog2026',
+  storageKey: 'cogtive_defelipe_pwd_v1',
+  sessionKey: 'cogtive_defelipe_auth_v1'
+};
+
+function getCurrentPassword() {
+  try { const s = localStorage.getItem(AUTH.storageKey); return s || AUTH.defaultPassword; } catch(e) { return AUTH.defaultPassword; }
+}
+function setCurrentPassword(p) { try { localStorage.setItem(AUTH.storageKey, p); } catch(e) {} }
+function resetPassword() { try { localStorage.removeItem(AUTH.storageKey); } catch(e) {} }
+function isAlreadyAuthed() { try { return sessionStorage.getItem(AUTH.sessionKey) === '1'; } catch(e) { return false; } }
+function markAuthed() { try { sessionStorage.setItem(AUTH.sessionKey, '1'); } catch(e) {} }
+
+function logoutLead() {
+  try { sessionStorage.removeItem(AUTH.sessionKey); } catch(e) {}
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('app').classList.add('hidden');
+  document.body.classList.add('locked');
+}
+
+function revealApp() {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('app').classList.remove('hidden');
+  document.body.classList.remove('locked');
+  markAuthed();
+  initAnimations();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (isAlreadyAuthed()) { revealApp(); } else { document.body.classList.add('locked'); }
+
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const pwd = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.textContent = '';
+    if (email !== AUTH.authorizedEmail.toLowerCase()) { errEl.textContent = '✕ E-mail não autorizado para esta apresentação.'; return; }
+    if (pwd !== getCurrentPassword()) { errEl.textContent = '✕ Senha incorreta. Verifique com quem enviou o link.'; return; }
+    revealApp();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) { e.preventDefault(); openAdmin(); }
+    if (e.key === 'Escape') { const ov = document.getElementById('adminOverlay'); if (ov.classList.contains('visible')) closeAdmin(); }
+  });
+
+  document.getElementById('adminClose').addEventListener('click', closeAdmin);
+  document.getElementById('adminUnlock').addEventListener('click', tryUnlockAdmin);
+  document.getElementById('adminMaster').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlockAdmin(); });
+  document.getElementById('adminSavePwd').addEventListener('click', saveLeadPwd);
+  document.getElementById('adminNewPwd').addEventListener('keydown', (e) => { if (e.key === 'Enter') saveLeadPwd(); });
+  document.getElementById('adminReset').addEventListener('click', () => { resetPassword(); updateAdminDisplay(); setAdminStatus('Senha resetada para o valor inicial.', 'ok'); });
+  document.getElementById('adminReveal').addEventListener('click', () => { document.getElementById('adminCurrentPwd').textContent = getCurrentPassword(); });
+  document.getElementById('adminLogout').addEventListener('click', () => { logoutLead(); closeAdmin(); });
+});
+
+function openAdmin() {
+  const ov = document.getElementById('adminOverlay');
+  ov.classList.add('visible');
+  document.getElementById('adminGate').style.display = '';
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('adminMaster').value = '';
+  document.getElementById('adminGateStatus').textContent = '';
+  setTimeout(() => document.getElementById('adminMaster').focus(), 50);
+}
+function closeAdmin() { document.getElementById('adminOverlay').classList.remove('visible'); }
+function tryUnlockAdmin() {
+  const v = document.getElementById('adminMaster').value;
+  const status = document.getElementById('adminGateStatus');
+  if (v === AUTH.masterPassword) {
+    document.getElementById('adminGate').style.display = 'none';
+    document.getElementById('adminPanel').style.display = '';
+    updateAdminDisplay();
+    status.textContent = '';
+  } else { status.textContent = '✕ Master password incorreta.'; }
+}
+function updateAdminDisplay() { document.getElementById('adminCurrentPwd').textContent = '••••••••'; document.getElementById('adminNewPwd').value = ''; }
+function setAdminStatus(msg, kind) { const s = document.getElementById('adminStatus'); s.textContent = msg; s.className = 'admin-status ' + (kind || ''); }
+function saveLeadPwd() {
+  const v = document.getElementById('adminNewPwd').value.trim();
+  if (v.length < 4) { setAdminStatus('✕ A nova senha precisa ter pelo menos 4 caracteres.', 'err'); return; }
+  setCurrentPassword(v);
+  updateAdminDisplay();
+  setAdminStatus('✓ Senha atualizada com sucesso neste navegador.', 'ok');
+}
+
+// ANIMATIONS
+let animationsStarted = false;
+function initAnimations() {
+  if (animationsStarted) return;
+  animationsStarted = true;
+
+  const particlesEl = document.getElementById('particles');
+  if (particlesEl && particlesEl.childElementCount === 0) {
+    for (let i = 0; i < 34; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (10 + Math.random() * 14) + 's';
+      p.style.animationDelay = (Math.random() * 15) + 's';
+      const sz = 1 + Math.random() * 2.5;
+      p.style.width = sz + 'px'; p.style.height = sz + 'px';
+      particlesEl.appendChild(p);
+    }
+  }
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); revealObserver.unobserve(entry.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.counted) {
+        entry.target.dataset.counted = '1';
+        const target = parseFloat(entry.target.dataset.target);
+        const isFloat = target % 1 !== 0;
+        const duration = 1800;
+        const start = performance.now();
+        (function update(now) {
+          const elapsed = (now || performance.now()) - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const current = eased * target;
+          entry.target.textContent = isFloat ? current.toFixed(1) : Math.round(current);
+          if (progress < 1) requestAnimationFrame(update);
+        })();
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
+
+  const flowContainer = document.getElementById('flowContainer');
+  if (flowContainer) {
+    const flowObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.flow-step').forEach(step => {
+            const delay = parseInt(step.dataset.delay || 0);
+            setTimeout(() => step.classList.add('active'), delay);
+          });
+          flowObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    flowObserver.observe(flowContainer);
+  }
+
+  const timelineVisual = document.getElementById('timelineVisual');
+  if (timelineVisual) {
+    const tlObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.tl-segment').forEach((seg, i) => {
+            setTimeout(() => { seg.style.width = seg.dataset.width + '%'; }, i * 60);
+          });
+          tlObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    tlObserver.observe(timelineVisual);
+  }
+
+  const oeeDash = document.getElementById('oeeDashboard');
+  if (oeeDash) {
+    const gObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.gauge-fill').forEach(fill => {
+            setTimeout(() => { fill.style.strokeDashoffset = fill.dataset.target; }, 250);
+          });
+          gObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    gObs.observe(oeeDash);
+  }
+}
+</script>
+</body>
+</html>
